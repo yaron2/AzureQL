@@ -20,7 +20,7 @@ Getting started:
 var AzureQL =  require ('azureql');
 
 AzureQL.init(process.env.appId, process.env.password, process.env.tenantId, process.env.subscriptionId, () => {
-    AzureQL.performQuery('select * from virtualmachines where name="myVM"';, (response) => {
+    AzureQL.performQuery('select * from virtualmachines where name="myVM"', (response) => {
         log.console(response.results);
     });
 });
