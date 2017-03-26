@@ -1,3 +1,5 @@
+"use strict";
+
 var AzureQL = function () {
     var AzureAPI = require('./azureapi');
     var alasql = require('alasql');

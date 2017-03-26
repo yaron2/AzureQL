@@ -1,3 +1,5 @@
+"use strict";
+
 var AzureAPI = function () {
     var resources = [
         "virtualMachines",
