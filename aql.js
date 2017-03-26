@@ -21,6 +21,13 @@ var AzureQL = function () {
         }
     }
     
+    function getFixedQuery(query, table) {
+        var indexOfQueryTable = query.toLowerCase().indexOf(table);
+        query = query.replace(query.substr(indexOfQueryTable, table.length), table);
+
+        return query;
+    }
+
     function performQuery(query, callback) {
         var resources = AzureAPI.getResourcesNames();
         var table = getTableToQuery(query, resources);
@@ -34,6 +41,8 @@ var AzureQL = function () {
                 alasql.tables[table].data = data;
                 
                 try {
+                    query = getFixedQuery(query, table);
+
                     var res = alasql(query);
                     callback({ status: 'ok', results: res });
                 }
