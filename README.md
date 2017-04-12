@@ -13,6 +13,7 @@ AzureQL needs the following inputs:
 1) appId - ApplicationId of an Azure Active Directory application with permissions to access Azure API
 2) password - The password of the Azure AD app
 3) subscriptionId - the ID of the subscription
+4) tenantId - Get it from the Azure Portal, navigate to Active Directory, Manage / Properties, and copy the Directory ID
 
 Getting started:
 
