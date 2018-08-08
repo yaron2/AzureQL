@@ -28,7 +28,7 @@ AzureQL.init(process.env.appId, process.env.password, process.env.tenantId, p
 ```
 ## Queryable resources
 
-As of now, supported resources (tables) to query are: VirtualMachines, ScaleSets, StorageAccounts, NetworkSecurityGroups, ApplicationGateways, HDInsights, LoadBalancers, Batches, VirtualNetworks, AppServices, Redis, ResourceGroups, ExpressRoutes
+As of now, supported resources (tables) to query are: VirtualMachines, ScaleSets, ServiceFabrics, CosmosDbs, StorageAccounts, NetworkSecurityGroups, ApplicationGateways, HDInsights, LoadBalancers, Batches, VirtualNetworks, AppServices, Redis, ResourceGroups, ExpressRoutes
 
 More will be added soon.
 
