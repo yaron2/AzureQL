@@ -14,7 +14,9 @@ var AzureAPI = function () {
         "appServices",
         "redis",
         "resourceGroups",
-        "expressroutes"
+        "expressroutes",
+        "servicefabrics",
+        "cosmosdbs"
     ]
     
     var Azure = require('azure');
@@ -72,21 +74,21 @@ var AzureAPI = function () {
     }
 
     function getVMs(callback) {
-        let comp = new Azure.createARMComputeManagementClient(credentials, subscriptionID);
+        let comp = new Azure.createComputeManagementClient(credentials, subscriptionID);
         comp.virtualMachines.listAll((err, vms) => {
             callback(vms);
         });
     }
 
     function getVMSS(callback) {
-        let comp = new Azure.createARMComputeManagementClient(credentials, subscriptionID);
+        let comp = new Azure.createComputeManagementClient(credentials, subscriptionID);
         comp.virtualMachineScaleSets.listAll((err, ss) => {
             callback(ss);
         });
     }
 
     function getStorageAccounts(callback) {
-        let storageClient = new Azure.createARMStorageManagementClient(credentials, subscriptionID);
+        let storageClient = new Azure.createStorageManagementClient(credentials, subscriptionID);
         storageClient.storageAccounts.list((err, sa) => {
             callback(sa);
         });
@@ -102,7 +104,7 @@ var AzureAPI = function () {
     }
 
     function getLoadBalancers(callback) {
-        let networkClient = new Azure.createARMNetworkManagementClient(credentials, subscriptionID);
+        let networkClient = new Azure.createNetworkManagementClient(credentials, subscriptionID);
         networkClient.loadBalancers.listAll((err, lbs) => {
             callback(lbs);
         });
@@ -116,44 +118,58 @@ var AzureAPI = function () {
     }
 
     function getNSGs(callback) {
-        let networkClient = new Azure.createARMNetworkManagementClient(credentials, subscriptionID);
+        let networkClient = new Azure.createNetworkManagementClient(credentials, subscriptionID);
         networkClient.networkSecurityGroups.listAll((err, nsgs) => {
             callback(nsgs);
         });
     }
 
     function getAppServices(callback) {
-        let appServicesClient = new Azure.createARMWebsiteManagementClient(credentials, subscriptionID);
+        let appServicesClient = new Azure.createWebsiteManagementClient(credentials, subscriptionID);
         appServicesClient.global.getAllSites((err, webapps) => {
             callback(webapps);
         });
     }
 
     function getApplicationGateways(callback) {
-        let networkClient = new Azure.createARMNetworkManagementClient(credentials, subscriptionID);
+        let networkClient = new Azure.createNetworkManagementClient(credentials, subscriptionID);
         networkClient.applicationGateways.listAll((err, appGWs) => {
             callback(appGWs);
         });
     }
 
     function getExpressRoutes(callback) {
-        let networkClient = new Azure.createARMNetworkManagementClient(credentials, subscriptionID);
+        let networkClient = new Azure.createNetworkManagementClient(credentials, subscriptionID);
         networkClient.expressRouteCircuits.listAll((err, circuits) => {
             callback(circuits);
         });
     }
 
     function getVirtualNetworks(callback) {
-        let networkClient = new Azure.createARMNetworkManagementClient(credentials, subscriptionID);
+        let networkClient = new Azure.createNetworkManagementClient(credentials, subscriptionID);
         networkClient.virtualNetworks.listAll((err, vnets) => {
             callback(vnets);
         });
     }
 
     function getRedisCaches(callback) {
-        let redisClient = new Azure.createARMRedisCacheManagementClient(credentials, subscriptionID);
+        let redisClient = new Azure.createRedisCacheManagementClient(credentials, subscriptionID);
         redisClient.redis.list((err, redis) => {
             callback(redis);
+        });
+    }
+
+    function getServiceFabric(callback) {
+        let sfClient = new Azure.createServiceFabricManagementClient(credentials, subscriptionID);
+        sfClient.clusters.list((err, sf) => {
+            callback(sf);
+        });
+    }
+
+    function getCosmosDbs(callback) {
+        let cosmosClient = new Azure.createDocumentdbManagementClient(credentials, subscriptionID);
+        cosmosClient.databaseAccounts.list((err, cosmos) => {
+            callback(cosmos);
         });
     }
 
@@ -216,6 +232,14 @@ var AzureAPI = function () {
             }
             case "resourcegroups": {
                 getResourceGroups(callback);
+                break;
+            }
+            case "servicefabrics": {
+                getServiceFabric(callback);
+                break;
+            }
+            case "cosmosdbs": {
+                getCosmosDbs(callback);
                 break;
             }
             default:
